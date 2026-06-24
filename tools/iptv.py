@@ -22,7 +22,7 @@ IPV6_DIR = os.path.join(OUTPUT_DIR, 'ipv6')
 SPEED_LOG = os.path.join(OUTPUT_DIR, 'sort.log')
 
 SPEED_TEST_DURATION = 5
-MAX_WORKERS = 10
+MAX_WORKERS = 20
 
 # 全局变量
 failed_domains = set()
