@@ -14,6 +14,8 @@ https://yuxx.de5.net/97d6e00d.m3u
 https://yuxx.de5.net/cd8781ee.m3u
 #8
 https://yuxx.de5.net/a4093b67.m3u
+#9
+https://yuxx.de5.net/948bccb5.m3u
 #推流
 https://raw.githubusercontent.com/AnonymousOrz/IPTV/main/Live/collect/央卫内地主流频道cs推流250824(4).txt
 #移动
