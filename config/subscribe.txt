@@ -1,1 +1,5 @@
+https://bew.ccwu.cc/hotels/ALL.m3u
+https://fbf.de5.net/hotels/ALL.m3u
+https://nek.de5.net/py/hotel_only.m3u
+https://gec.de5.net/py/all_channels.m3u
 https://raw.githubusercontent.com/wybyu123/123/refs/heads/main/merged_channels.m3u
