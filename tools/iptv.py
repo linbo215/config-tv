@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import re
 import requests
@@ -338,20 +339,6 @@ def process_sources(sources):
             except Exception as e:
                 print(f"⚠️ 处理异常: {str(e)}")
 
-                # # 保存黑名单更新
-                # if failed_domains:
-                #     existing = set()
-                #     if os.path.exists(BLACKLIST_FILE):
-                #         with open(BLACKLIST_FILE, 'r') as f:
-                #             existing = set(line.strip() for line in f)
-            
-                #     new_domains = failed_domains - existing
-                #     if new_domains:
-                #         with open(BLACKLIST_FILE, 'a') as f:
-                #             for domain in new_domains:
-                #                 f.write(f"{domain}\n")
-                #         print(f"🆕 新增 {len(new_domains)} 个域名到黑名单")
-
     print("\n✅ 全部源检测完成")
     return processed
 
@@ -394,42 +381,40 @@ def finalize_output(organized, group_order, channel_order):
                 continue
 
             txt_lines.append(f"{group},#genre#")
-            #m3u_lines.append(f'#EXTINF:-1 group-title="{group}",{group}\n#genre#')
 
-            # 处理模板频道
+            # 处理模板频道 (修改限制为 20 个)
             for channel in channel_order[group]:
                 if channel not in organized[ip_type][group]:
                     continue
 
                 urls = sorted(organized[ip_type][group][channel], key=lambda x: x[1], reverse=True)
-                selected = [u[0] for u in urls[:10]]
+                selected = [u[0] for u in urls[:20]]
 
                 if selected:
-                   # txt_lines.append(f"{channel},{'#'.join(selected)}")
                     for url in selected:
                         txt_lines.append(f"{channel},{url}")
                         m3u_lines.append(f'#EXTINF:-1 tvg-name="{channel}"tvg-logo="https://gh.catmak.name/https://raw.githubusercontent.com/fanmingming/live/main/tv/{channel}.png" group-title="{group}",{channel}\n{url}')
 
-            # 处理额外频道
+            # 处理额外频道 (修改限制为 20 个)
             extra = sorted(
                 [c for c in organized[ip_type][group] if c not in channel_order[group]],
                 key=lambda x: x.lower()
             )
             for channel in extra:
                 urls = sorted(organized[ip_type][group][channel], key=lambda x: x[1], reverse=True)
-                selected = [u[0] for u in urls[:10]]
+                selected = [u[0] for u in urls[:20]]
                 if selected:
                     txt_lines.append(f"{channel},{'#'.join(selected)}")
                     for url in selected:
                         m3u_lines.append(f'#EXTINF:-1 tvg-name="{channel}" group-title="{group}",{channel}\n{url}')
 
-        # 处理其他分组
+        # 处理其他分组 (修改限制为 20 个)
         if '其他' in organized[ip_type]:
             txt_lines.append("其他,#genre#")
-            m3u_lines.append('#EXTINF:-1 group-title="其他",其他\n#genre#')
+            m3u_lines.append('#EXTINF:-1 group-title="其他",other\n#genre#')
             for channel in sorted(organized[ip_type]['其他'].keys(), key=lambda x: x.lower()):
                 urls = sorted(organized[ip_type]['其他'][channel], key=lambda x: x[1], reverse=True)
-                selected = [u[0] for u in urls[:10]]
+                selected = [u[0] for u in urls[:20]]
                 if selected:
                     txt_lines.append(f"{channel},{'#'.join(selected)}")
                     for url in selected:
