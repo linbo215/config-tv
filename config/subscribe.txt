@@ -1,3 +1,2 @@
-https://bew.ccwu.cc/hotels/ALL.m3u
-https://gec.de5.net/py/all_channels.m3u
 
+http://104.243.29.23:8000
